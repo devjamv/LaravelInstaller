@@ -102,7 +102,7 @@ class EnvironmentManager
         'APP_LOG_LEVEL=' . $request->app_log_level . "\n" .
         'APP_URL=' . $request->app_url . "\n\n" .
         'PURCHASE_CODE=' . $request->purchase_code . "\n\n" .
-        'APP_TIMEZONE=Europe/Berlin' . "\n" .
+        'APP_TIMEZONE=America/Mexico_City' . "\n" .
         '# more details about timezone: https://www.php.net/manual/en/timezones.asia.php' . "\n\n" .
         'DB_CONNECTION=' . $request->database_connection . "\n" .
         'DB_HOST=' . $request->database_hostname . "\n" .
