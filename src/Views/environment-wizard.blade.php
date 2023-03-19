@@ -119,6 +119,21 @@
                         </span>
                     @endif
                 </div>
+                
+                <div class="form-group {{ $errors->has('app_movil') ? ' has-error ' : '' }}">
+                    <label for="app_movil">
+                        {{ trans('installer_messages.environment.wizard.form.app_movil_label') }}
+                    </label> <label for="app_movil_true"> <input type="radio" name="app_movil" id="app_movil_true" value=true checked/>
+                        {{ trans('installer_messages.environment.wizard.form.app_movil_label_true') }}
+                    </label> <label for="app_movil_false"> <input type="radio" name="app_movil" id="app_movil_false" value=false/>
+                        {{ trans('installer_messages.environment.wizard.form.app_movil_label_false') }}
+                    </label>
+                    @if ($errors->has('app_movil'))
+                        <span class="error-block"> <i class="fa fa-fw fa-exclamation-triangle" aria-hidden="true"></i>
+                            {{ $errors->first('app_movil') }}
+                        </span>
+                    @endif
+                </div>
 
                 <div class="buttons">
                     <button class="button" onclick="showDatabaseSettings();return false">
