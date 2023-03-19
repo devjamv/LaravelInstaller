@@ -99,9 +99,9 @@ class EnvironmentManager
         'APP_ENV=' . $request->environment . "\n" .
         'APP_KEY=' . 'base64:' . base64_encode(Str::random(32)) . "\n" .
         'APP_DEBUG=' . $request->app_debug . "\n" .
+        'APP_MOVIL=' . $request->app_movil . "\n" .
         'APP_LOG_LEVEL=' . $request->app_log_level . "\n" .
         'APP_URL=' . $request->app_url . "\n\n" .
-        'APP_MOVIL=' . $request->app_movil . "\n\n" .
         'PURCHASE_CODE=' . $request->purchase_code . "\n\n" .
         'APP_TIMEZONE=America/Mexico_City' . "\n" .
         '# more details about timezone: https://www.php.net/manual/en/timezones.asia.php' . "\n\n" .
