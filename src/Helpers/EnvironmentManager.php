@@ -93,6 +93,7 @@ class EnvironmentManager
     public function saveFileWizard(Request $request)
     {
         $results = trans('installer_messages.environment.success');
+        $DEFAULT_LANG = 'en';
 
         $envFileData =
         'APP_NAME=\'' . $request->app_name . "'\n" .
@@ -102,6 +103,7 @@ class EnvironmentManager
         'APP_MOVIL=' . $request->app_movil . "\n" .
         'APP_LOG_LEVEL=' . $request->app_log_level . "\n" .
         'APP_URL=' . $request->app_url . "\n\n" .
+        'DEFAULT_LANG=' . $DEFAULT_LANG . "\n\n" .
         'PURCHASE_CODE=' . $request->purchase_code . "\n\n" .
         'APP_TIMEZONE=America/Mexico_City' . "\n" .
         '# more details about timezone: https://www.php.net/manual/en/timezones.asia.php' . "\n\n" .
