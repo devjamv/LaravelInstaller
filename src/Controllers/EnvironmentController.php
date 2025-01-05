@@ -50,6 +50,34 @@ class EnvironmentController extends Controller
     }
 
     /**
+     * Processes the newly saved environment configuration (Classic).
+     *
+     * @param Request $input
+     * @param Redirector $redirect
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function saveClassic(Request $input, Redirector $redirect)
+    {
+        $message = $this->EnvironmentManager->saveFileClassic($input);
+        event(new EnvironmentSaved($input));
+
+        $purchaseCode = env('PURCHASE_CODE', false);
+
+        if (!$this->isValidPurchaseCode($purchaseCode)) {
+            return $redirect->route('LaravelInstaller::environmentClassic')
+                ->with(['message' => $message, 'errors' => 'The purchase key is invalid.']);
+        }
+
+        $validation = $this->verifyLicenseWithAPI($purchaseCode, url('/'));
+        if (!$validation['success']) {
+            return $redirect->route('LaravelInstaller::environmentClassic')
+                ->with(['message' => $message, 'errors' => $validation['message']]);
+        }
+
+        return $redirect->route('LaravelInstaller::environmentClassic')->with(['message' => $message]);
+    }
+
+    /**
      * Processes the newly saved environment configuration (Form Wizard).
      *
      * @param Request $request
@@ -76,11 +104,54 @@ class EnvironmentController extends Controller
             return view('vendor.installer.environment-wizard', compact('errors'));
         }
 
-
         event(new EnvironmentSaved($request));
+    
+        $purchaseCode = $request->get('purchase_code');
+        if (!$this->isValidPurchaseCode($purchaseCode)) {
+            $errors = $validator->errors()->add('purchase_code', 'The purchase key is invalid.');
+            return view('vendor.installer.environment-wizard', compact('errors'));
+        }
 
-        return $redirect->route('LaravelInstaller::database')
-            ->with(['results' => $results]);
+        $validation = $this->verifyLicenseWithAPI($purchaseCode, url('/'));
+        if (!$validation['success']) {
+            $errors = $validator->errors()->add('purchase_code', $validation['message']);
+            return view('vendor.installer.environment-wizard', compact('errors'));
+        }
+
+        return $redirect->route('LaravelInstaller::database')->with(['results' => $results]);
+    }
+
+    private function verifyLicenseWithAPI($purchaseCode, $url)
+    {
+        try {
+            $response = Http::post('https://license.devjamv.com/api/verify', [
+                'purchase_code' => $purchaseCode,
+                'url' => $url
+            ]);
+
+            if ($response->failed()) {
+                return [
+                    'success' => false,
+                    'message' => json_decode($response->body(), true)['error'] ?? 'Failed to validate purchase code.',
+                ];
+            }
+
+            $data = json_decode($response->body(), true);
+            return [
+                'success' => true,
+                'site_key' => $data['SITE_KEY'] ?? '',
+            ];
+        } catch (Exception $e) {
+            return [
+                'success' => false,
+                'message' => 'Unable to connect to the license server. Please try again later.',
+            ];
+        }
+    }
+
+    private function isValidPurchaseCode($code)
+    {
+        return preg_match("/^(\w{8})-((\w{4})-){3}(\w{12})$/", $code);
     }
 
     /**

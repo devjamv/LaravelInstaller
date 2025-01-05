@@ -103,6 +103,7 @@ class EnvironmentManager
         'APP_MOVIL=' . $request->app_movil . "\n" .
         'APP_LOG_LEVEL=' . $request->app_log_level . "\n" .
         'APP_URL=' . $request->app_url . "\n\n" .
+        'APP_URL_WITHOUT_SSL=' . str_replace('https', 'http', $request->app_url) . "\n\n" .
         'DEFAULT_LANG=' . $DEFAULT_LANG . "\n\n" .
         'PURCHASE_CODE=' . $request->purchase_code . "\n\n" .
         'APP_TIMEZONE=America/Mexico_City' . "\n" .
@@ -129,6 +130,16 @@ class EnvironmentManager
         'PUSHER_APP_ID=' . "\n" .
         'PUSHER_APP_KEY=' . "\n" .
         'PUSHER_APP_SECRET=' . "\n\n";
+        'WA_SERVER_URL=http://127.0.0.1:8000' . "\n";
+        'WA_SERVER_HOST=127.0.0.1' . "\n";
+        'WA_SERVER_PORT=8000' . "\n";
+        'WA_SERVER_MAX_RETRIES=5' . "\n";
+        'WA_SERVER_RECONNECT_INTERVAL=5000' . "\n\n";
+        'HOST=127.0.0.1' . "\n";
+        'PORT=8000' . "\n";
+        'MAX_RETRIES=5' . "\n";
+        'RECONNECT_INTERVAL=5000' . "\n\n";
+        'DELAY_TIME=2000' . "\n";
 
         try {
             file_put_contents($this->envPath, $envFileData);
