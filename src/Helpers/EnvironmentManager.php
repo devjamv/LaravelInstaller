@@ -130,15 +130,15 @@ class EnvironmentManager
         'PUSHER_APP_ID=' . "\n" .
         'PUSHER_APP_KEY=' . "\n" .
         'PUSHER_APP_SECRET=' . "\n\n";
-        'WA_SERVER_URL=http://127.0.0.1:8000' . "\n";
-        'WA_SERVER_HOST=127.0.0.1' . "\n";
-        'WA_SERVER_PORT=8000' . "\n";
-        'WA_SERVER_MAX_RETRIES=5' . "\n";
-        'WA_SERVER_RECONNECT_INTERVAL=5000' . "\n\n";
-        'HOST=127.0.0.1' . "\n";
-        'PORT=8000' . "\n";
-        'MAX_RETRIES=5' . "\n";
-        'RECONNECT_INTERVAL=5000' . "\n\n";
+        'WA_SERVER_URL=http://127.0.0.1:8000' . "\n" .
+        'WA_SERVER_HOST=127.0.0.1' . "\n" .
+        'WA_SERVER_PORT=8000' . "\n" .
+        'WA_SERVER_MAX_RETRIES=5' . "\n" .
+        'WA_SERVER_RECONNECT_INTERVAL=5000' . "\n\n" .
+        'HOST=127.0.0.1' . "\n" .
+        'PORT=8000' . "\n" .
+        'MAX_RETRIES=5' . "\n" .
+        'RECONNECT_INTERVAL=5000' . "\n\n" .
         'DELAY_TIME=2000' . "\n";
 
         try {
