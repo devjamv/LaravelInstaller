@@ -35,7 +35,6 @@ class FinalController extends Controller
         }
 
         event(new LaravelInstallerFinished);
-        event(new \App\Events\InstallationCompleted());
 
         return view('vendor.installer.finished', compact('finalMessages', 'finalStatusMessage', 'finalEnvFile'));
     }
