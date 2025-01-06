@@ -102,10 +102,10 @@ class EnvironmentManager
         'APP_DEBUG=' . $request->app_debug . "\n" .
         'APP_MOVIL=' . $request->app_movil . "\n" .
         'APP_LOG_LEVEL=' . $request->app_log_level . "\n" .
-        'APP_URL=' . $request->app_url . "\n\n" .
-        'APP_URL_WITHOUT_SSL=' . str_replace('https', 'http', $request->app_url) . "\n\n" .
-        'DEFAULT_LANG=' . $DEFAULT_LANG . "\n\n" .
+        'APP_URL=' . $request->app_url . "\n" .
+        'APP_URL_WITHOUT_SSL=' . str_replace('https', 'http', $request->app_url) . "\n" .
         'PURCHASE_CODE=' . $request->purchase_code . "\n\n" .
+        'DEFAULT_LANG=' . $DEFAULT_LANG . "\n\n" .
         'APP_TIMEZONE=America/Mexico_City' . "\n" .
         '# more details about timezone: https://www.php.net/manual/en/timezones.asia.php' . "\n\n" .
         'DB_CONNECTION=' . $request->database_connection . "\n" .
